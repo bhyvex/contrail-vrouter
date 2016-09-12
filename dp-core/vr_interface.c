@@ -2015,15 +2015,16 @@ __vr_interface_make_req(vr_interface_req *req, struct vr_interface *intf,
         hif_ops->hif_stats_update(intf, core);
     }
 
-    if (core == (unsigned)-1) {
+    //WORKAROUND on freezing kernel
+    //if (core == (unsigned)-1) {
         /* summed up stats */
-        for (cpu = 0; cpu < vr_num_cpus; cpu++) {
-            vr_interface_add_response(req, vif_get_stats(intf, cpu));
-        }
-    } else if (core < vr_num_cpus) {
+      //  for (cpu = 0; cpu < vr_num_cpus; cpu++) {
+      //      vr_interface_add_response(req, vif_get_stats(intf, cpu));
+      //  }
+    //} else if (core < vr_num_cpus) {
         /* stats for a specific core */
-        vr_interface_add_response(req, vif_get_stats(intf, core));
-    }
+    //    vr_interface_add_response(req, vif_get_stats(intf, core));
+    //}
     /* otherwise the conters will be zeros */
 
     req->vifr_speed = -1;
